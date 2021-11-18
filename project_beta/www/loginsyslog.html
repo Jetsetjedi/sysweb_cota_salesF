@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com -->
+  <title>Syscontrol</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="#">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <style>
+ html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+ </style>
+ <!-- Login syslog -->
+ <script type="text/javascript">
+  $(document).ready(function()
+{
+  console.log('Ready!');
+  
+  $('form#syslogin').submit(
+    function(event) {
+      var $form = $(this);
+      var divResult = $('div#userResult');
+      divResult.hide();
+      var loginData = {};
+      loginData.username = $('input#user').val();
+      loginData.password = $('input#senha').val(); 
+      $.ajax({
+         url: './',
+         type: 'POST',
+         data: loginData,
+        success: function(result) {
+          divResult.text('Resulto: ' + result);
+          divResult.show();				
+        }
+      });
+    event.preventDefault();
+    }
+  );
+
+  $('#userlogin').click(
+    function (){
+      $('form#syslogin').submit();	
+    }
+  );
+
+});
+  </script>
+
+</head>
+<body class="text-center">
+    
+    <main class="form-signin">
+      <form id="syslogin">
+        <!-- <h1 class="h3 mb-3 fw-normal">Syslog Web</h1> -->
+        <img class="mb-4" src="https://syscontrol.com.br/wp-content/uploads/2019/08/syscontrol-logo.png" alt="" width="172" height="57">
+        <h1 class="h3 mb-3 fw-normal">Controle de acesso</h1>
+    
+        <div class="form-floating">
+          <input type="text" class="form-control" id="user" value="SISTEMAS">
+          <label for="floatingInput">Usuário</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="senha" value="inprise">
+          <label for="floatingPassword">Senha</label>
+        </div>
+    
+        <!-- <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div> -->
+        <button class="w-100 btn btn-lg btn-primary" type="submit" id="userlogin">Entrar</button>
+        <p class="mt-5 mb-3 text-muted">© 2021</p>
+      </form>
+      <div class="alert alert-primary collapse" role="alert" id="userResult"></div>
+    </main>
+    
+    
+        
+      
+    
+    </body>
+</html>
